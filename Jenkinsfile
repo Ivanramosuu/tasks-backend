@@ -23,7 +23,7 @@ pipeline {
         }
         stage ('Quality Gate') {
             steps {
-                sleep(10)
+                //sleep(10)
                 timeout(time: 1, unit: 'MINUTES') {
                     waitForQualityGate abortPipeline: true
                 }    
@@ -55,7 +55,7 @@ pipeline {
             steps {
                 dir('functional-test') {
 					git credentialsId: 'github_login', url: 'https://github.com/Ivanramosuu/tasks-functional-test.git'
-                    bat 'mvn test'
+                    bat 'mvn test' 
                 }
             }
         }
