@@ -42,5 +42,22 @@ pipeline {
 				}	
             }
         }
+        stage ('Deploy Frontend') {
+            steps {
+                dir('frontend') {
+                    git credentialsId: 'github_login', url: 'https://github.com/Ivanramosuu/tasks-frontend.git'
+                    bat 'mvn clean package' 
+                    deploy adapters: [tomcat8(credentialsId: 'ToncatUser', path: '', url: 'http://192.168.0.9:8001/')], contextPath: 'tasks', war: 'target/tasks.war'   
+                }
+            }
+        }
+        stage ('Functional Test') {
+            steps {
+                dir('functional-test') {
+                    git credentialsId: 'github_login', url: 'https://github.com/Ivanramosuu/tasks-functional-test.git'
+                    bat 'mvn test'
+                }
+            }
+        }
     }
 }
