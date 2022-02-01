@@ -36,10 +36,10 @@ pipeline {
         }
         stage ('API Test') {
             steps {
-				dir('api-test') {
-					git credentialsId: 'github_login', url: 'https://github.com/Ivanramosuu/tasks-api-test.git' 
-					bat 'mvn test'
-				}	
+		dir('api-test') {
+		    git credentialsId: 'github_login', url: 'https://github.com/Ivanramosuu/tasks-api-test.git' 
+		    bat 'mvn test'
+		}	
             }
         }
         stage ('Deploy Frontend') {
@@ -54,7 +54,7 @@ pipeline {
         stage ('Functional Test') {
             steps {
                 dir('functional-test') {
-					git credentialsId: 'github_login', url: 'https://github.com/Ivanramosuu/tasks-functional-test.git'
+		    git credentialsId: 'github_login', url: 'https://github.com/Ivanramosuu/tasks-functional-test.git'
                     bat 'mvn test' 
                 }
             }
